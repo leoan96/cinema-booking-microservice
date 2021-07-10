@@ -8,6 +8,7 @@ import { mongooseEnvironmentConfiguration } from './module/mongoose/mongoose.con
 import { MongooseClient } from './module/mongoose/mongoose.provider';
 import { redisEnvironmentConfiguration } from './module/redis/redis.configuration';
 import { RedisModule } from './module/redis/redis.module';
+import { TicketModule } from './module/ticket/ticket.module';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { RedisModule } from './module/redis/redis.module';
     LoggerModule,
     RedisModule,
     BookingModule,
+    TicketModule,
   ],
   controllers: [],
   providers: [],
