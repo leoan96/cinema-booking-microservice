@@ -99,6 +99,29 @@
           "booking"
         ]
       }
+    },
+    "/ticket/{ticketId}": {
+      "get": {
+        "operationId": "TicketController_getTicketById",
+        "parameters": [
+          {
+            "name": "ticketId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "ticket"
+        ]
+      }
     }
   }
 }
