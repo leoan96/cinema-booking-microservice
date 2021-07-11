@@ -5,7 +5,7 @@ import * as helmet from 'helmet';
 import * as express from 'express';
 import * as httpContext from 'express-http-context';
 import { ConfigService } from '@nestjs/config';
-import { appConfiguration } from './app.configuration';
+import { appConfiguration, initializeSwagger } from './app.configuration';
 import { setCorrelationId } from './shared/utils';
 import { CustomLogger } from './logger/custom-logger.logger';
 import { LoggingInterceptor } from './interceptor/logging.interceptor';
@@ -35,6 +35,8 @@ async function bootstrap() {
   app.use(httpContext.middleware);
   app.use(await session);
   app.use(setCorrelationId);
+
+  initializeSwagger(app, configService);
 
   const port = configService.get('app.port');
   await app.listen(port);
