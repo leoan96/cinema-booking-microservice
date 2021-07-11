@@ -13,4 +13,8 @@ export class TicketService {
   async getTicketById(ticketId: string): Promise<BookingDocument> {
     return await this.bookingModel.findById(ticketId);
   }
+
+  async getAllTickets(): Promise<BookingDocument[]> {
+    return await this.bookingModel.find({});
+  }
 }

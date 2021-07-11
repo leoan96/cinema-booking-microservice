@@ -51,6 +51,7 @@ export const initializeSwagger = (
     .setVersion('1.0.0')
     .addTag('booking')
     .addTag('ticket')
+    .addTag('admin')
     .addBearerAuth(
       {
         type: 'http',

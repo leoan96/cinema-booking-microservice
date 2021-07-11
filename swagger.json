@@ -14,6 +14,10 @@
     {
       "name": "ticket",
       "description": ""
+    },
+    {
+      "name": "admin",
+      "description": ""
     }
   ],
   "servers": [],
@@ -78,7 +82,9 @@
   "paths": {
     "/booking": {
       "post": {
-        "operationId": "BookingController_bookTicket",
+        "operationId": "bookTicket",
+        "summary": "Book a ticket",
+        "description": "Book a ticket using account id",
         "parameters": [],
         "requestBody": {
           "required": true,
@@ -91,8 +97,14 @@
           }
         },
         "responses": {
-          "201": {
-            "description": ""
+          "200": {
+            "description": "Successfully booked ticket"
+          },
+          "400": {
+            "description": "Required to be logged in for this action"
+          },
+          "500": {
+            "description": "Something went terribly wrong"
           }
         },
         "tags": [
@@ -102,7 +114,9 @@
     },
     "/ticket/{ticketId}": {
       "get": {
-        "operationId": "TicketController_getTicketById",
+        "operationId": "getTicketById",
+        "summary": "Retrieve a ticket with given ticket id",
+        "description": "Retrieves a ticket with given ticket id, user role required to perform this operation",
         "parameters": [
           {
             "name": "ticketId",
@@ -115,11 +129,33 @@
         ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "Retrieved ticket by ticket id"
+          },
+          "500": {
+            "description": "Something went terribly wrong"
           }
         },
         "tags": [
           "ticket"
+        ]
+      }
+    },
+    "/admin/ticket": {
+      "get": {
+        "operationId": "getAllTickets",
+        "summary": "Retrieve all tickets",
+        "description": "Retrieve all tickets, admin role required to perform this operation",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Retrieved all tickets"
+          },
+          "500": {
+            "description": "Something went terribly wrong"
+          }
+        },
+        "tags": [
+          "admin"
         ]
       }
     }
