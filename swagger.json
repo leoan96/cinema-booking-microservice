@@ -20,15 +20,18 @@
       "description": ""
     }
   ],
-  "servers": [],
+  "servers": [
+    {
+      "url": "http://localhost:3001"
+    }
+  ],
   "components": {
     "securitySchemes": {
       "backendToken": {
         "scheme": "bearer",
-        "bearerFormat": "token",
+        "bearerFormat": "JWT",
         "type": "http",
-        "description": "Auth for bearer token",
-        "in": "header"
+        "description": "Auth for bearer token"
       },
       "redisSessionCookie": {
         "scheme": "bearer",
@@ -156,6 +159,11 @@
         },
         "tags": [
           "admin"
+        ],
+        "security": [
+          {
+            "backendToken": []
+          }
         ]
       }
     }

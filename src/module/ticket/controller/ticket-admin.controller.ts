@@ -6,6 +6,7 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import {
+  ApiBearerAuth,
   ApiInternalServerErrorResponse,
   ApiOkResponse,
   ApiOperation,
@@ -24,6 +25,7 @@ export class TicketAdminController {
   constructor(private readonly ticketService: TicketService) {}
 
   @Get('')
+  @ApiBearerAuth('backendToken')
   @ApiOperation({
     operationId: 'getAllTickets',
     summary: 'Retrieve all tickets',

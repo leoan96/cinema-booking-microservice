@@ -56,9 +56,6 @@ export const initializeSwagger = (
       {
         type: 'http',
         description: 'Auth for bearer token',
-        scheme: 'bearer',
-        bearerFormat: 'token',
-        in: 'header',
       },
       'backendToken',
     )
@@ -71,7 +68,7 @@ export const initializeSwagger = (
       },
       'redisSessionCookie',
     )
-    .setBasePath(appBaseUrl)
+    .addServer(appBaseUrl)
     .build();
 
   const document = SwaggerModule.createDocument(app, config);

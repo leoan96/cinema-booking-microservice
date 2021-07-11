@@ -1,8 +1,12 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, ServiceUnavailableException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { BookingDTO } from './dto/booking.dto';
 import { Booking, BookingDocument } from './schema/booking.schema';
+import { createUUID } from 'src/shared/utils';
+import * as axios from 'axios';
+import { PaymentApiFactory } from 'api/payment';
+import { ConfigService } from '@nestjs/config';
 
 /*
     NOTE:
@@ -17,6 +21,7 @@ export class BookingService {
   constructor(
     @InjectModel(Booking.name)
     private readonly bookingModel: Model<BookingDocument>,
+    private readonly configService: ConfigService,
   ) {}
 
   async bookTicket({
@@ -26,12 +31,42 @@ export class BookingService {
     cinema,
     totalPrice,
   }: BookingDTO): Promise<BookingDocument> {
-    return await this.bookingModel.create({
+    const transactionId = createUUID();
+
+    // https://jiratech.com/media/posts/integrate-openapi-specification-using-openapi-generator-to-a-reactjs-project-with-typescript-and-axios
+    const accessToken = 'placeholder';
+    const baseUrl = this.configService.get('booking.apiPaymentUrl');
+
+    const axiosInstance = axios.default.create({
+      headers: {
+        'access-token': accessToken,
+      },
+    });
+
+    const paymentApi = PaymentApiFactory(null, baseUrl, axiosInstance);
+
+    try {
+      await paymentApi.paymentControllerPayForBooking({
+        totalPrice,
+        transactionId,
+      });
+    } catch (err) {
+      throw new ServiceUnavailableException(
+        'Server is currently unavailable, plesase try again later...',
+      );
+    }
+
+    const ticket = await this.bookingModel.create({
       city_id,
       time,
       movie_id,
       cinema,
       totalPrice,
+      transactionId,
     });
+
+    // TODO: call to api-notification to send email to user (using kafka)
+
+    return ticket;
   }
 }

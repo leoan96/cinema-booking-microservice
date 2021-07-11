@@ -9,7 +9,7 @@ import {
 import { ValidationPipe } from 'src/pipe/validation.pipe';
 import { BookingService } from './booking.service';
 import { BookingDTO } from './dto/booking.dto';
-import { BookingDocument } from './schema/booking.schema';
+import { BookingSuccess } from './interface/booking.interface';
 
 @ApiTags('booking')
 @Controller('booking')
@@ -35,7 +35,7 @@ export class BookingController {
   @HttpCode(HttpStatus.OK)
   async bookTicket(
     @Body(new ValidationPipe()) bookingDto: BookingDTO,
-  ): Promise<BookingDocument> {
+  ): Promise<BookingSuccess> {
     return await this.bookingService.bookTicket(bookingDto);
   }
 }

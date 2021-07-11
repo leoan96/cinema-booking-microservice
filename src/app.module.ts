@@ -3,6 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { appEnvironmentConfiguration } from './app.env.configuration';
 import { LoggerModule } from './logger/logger.module';
+import { bookingEnvironmentConfiguration } from './module/booking/booking.env.configuration';
 import { BookingModule } from './module/booking/booking.module';
 import { mongooseEnvironmentConfiguration } from './module/mongoose/mongoose.configuration';
 import { MongooseClient } from './module/mongoose/mongoose.provider';
@@ -18,6 +19,7 @@ import { TicketModule } from './module/ticket/ticket.module';
         appEnvironmentConfiguration,
         mongooseEnvironmentConfiguration,
         redisEnvironmentConfiguration,
+        bookingEnvironmentConfiguration,
       ],
       isGlobal: true,
     }),
