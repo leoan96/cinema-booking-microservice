@@ -7,6 +7,8 @@ import { createUUID } from 'src/shared/utils';
 import * as axios from 'axios';
 import { PaymentApiFactory } from 'api/payment';
 import { ConfigService } from '@nestjs/config';
+import { JwtAuthenticationService } from '../jwt/jwt.service';
+import { ROLES } from 'src/guard/role/role.constant';
 
 /*
     NOTE:
@@ -22,6 +24,7 @@ export class BookingService {
     @InjectModel(Booking.name)
     private readonly bookingModel: Model<BookingDocument>,
     private readonly configService: ConfigService,
+    private readonly jwtAuthenticationService: JwtAuthenticationService,
   ) {}
 
   async bookTicket({
@@ -34,7 +37,11 @@ export class BookingService {
     const transactionId = createUUID();
 
     // https://jiratech.com/media/posts/integrate-openapi-specification-using-openapi-generator-to-a-reactjs-project-with-typescript-and-axios
-    const accessToken = 'placeholder';
+    const accessToken = await this.jwtAuthenticationService.signToken({
+      fromApi: this.configService.get('app.name'),
+      role: [ROLES.backendApi],
+    });
+
     const baseUrl = this.configService.get('booking.apiPaymentUrl');
 
     const axiosInstance = axios.default.create({
