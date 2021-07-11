@@ -14,7 +14,7 @@ import { JwtAuthenticationService } from './jwt.service';
         const algorithm = configService.get('jwt.algorithm');
         const secret = Buffer.from(privateKey, 'base64').toString('utf-8');
         const options: JwtModuleOptions = {
-          secret: secret,
+          secret,
           signOptions: { expiresIn, algorithm },
         };
         return options;

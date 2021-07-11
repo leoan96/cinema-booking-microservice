@@ -15,13 +15,15 @@ export class JwtAuthenticationService {
   }
 
   async verifyClaims(token) {
-    const publickKey = this.configService.get('jwt.publicKey');
-    const secret = Buffer.from(publickKey, 'base64').toString('utf-8');
+    const publicKey = this.configService.get('jwt.publicKey');
+    const algorithms = [this.configService.get('jwt.algorithm')];
+    const secret = Buffer.from(publicKey, 'base64').toString('utf-8');
     let claims;
+
     try {
       claims = await this.jwtService.verifyAsync(token?.split(' ')[1], {
         secret,
-        algorithms: ['RS512'],
+        algorithms,
       });
     } catch (error) {
       throw new HttpException('Invalid jwt token', HttpStatus.BAD_REQUEST);
