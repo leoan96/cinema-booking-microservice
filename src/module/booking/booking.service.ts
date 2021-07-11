@@ -72,7 +72,7 @@ export class BookingService {
       transactionId,
     });
 
-    // TODO: call to api-notification to send email to user (using kafka)
+    // TODO: async call to api-notification to send email to user (using kafka)
 
     return ticket;
   }
