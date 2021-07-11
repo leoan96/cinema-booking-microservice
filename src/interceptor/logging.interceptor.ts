@@ -30,6 +30,7 @@ export class LoggingInterceptor implements NestInterceptor {
     // https://stackoverflow.com/questions/19215042/express-logging-response-body
 
     // repeated code; same body, rawHeaders, ... used below (to refactor in future)
+    // JSON.stringify(responseJson) produces a lot of '/' due to newline '/n'
     const { body, headers, httpVersion, method, socket, url } = request;
     const filteredHeaders = lodash.omit(headers, 'authorization'); // hide backend token
 

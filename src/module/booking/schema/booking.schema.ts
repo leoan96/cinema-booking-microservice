@@ -25,6 +25,9 @@ export class Booking {
 
   @Prop({ required: true, type: Number })
   totalPrice: Number;
+
+  @Prop({ required: true, type: String })
+  transactionId: String;
 }
 
 export const BookingSchema = SchemaFactory.createForClass(Booking);
