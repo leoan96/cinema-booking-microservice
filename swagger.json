@@ -1,0 +1,171 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Booking API",
+    "description": "Reserve ticket for purchase",
+    "version": "1.0.0",
+    "contact": {}
+  },
+  "tags": [
+    {
+      "name": "booking",
+      "description": ""
+    },
+    {
+      "name": "ticket",
+      "description": ""
+    },
+    {
+      "name": "admin",
+      "description": ""
+    }
+  ],
+  "servers": [
+    {
+      "url": "http://localhost:3001"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "backendToken": {
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "type": "http",
+        "description": "Auth for bearer token"
+      },
+      "redisSessionCookie": {
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "type": "apiKey",
+        "description": "Auth for redis session",
+        "in": "cookie",
+        "name": "connect.sid"
+      }
+    },
+    "schemas": {
+      "BookingDTO": {
+        "type": "object",
+        "properties": {
+          "city_id": {
+            "type": "string",
+            "description": "Id of city",
+            "example": "588ababf2d029a6d15d0b5bf"
+          },
+          "time": {
+            "type": "string",
+            "description": "Time of movie",
+            "example": "10:15"
+          },
+          "movie_id": {
+            "type": "string",
+            "description": "Id of movie",
+            "example": "2"
+          },
+          "cinema": {
+            "type": "string",
+            "description": "Id of cinema",
+            "example": "588ac3a02d029a6d15d0b5c4"
+          },
+          "totalPrice": {
+            "type": "number",
+            "description": "Total price of tickets",
+            "example": "20.21"
+          }
+        },
+        "required": [
+          "city_id",
+          "time",
+          "movie_id",
+          "cinema",
+          "totalPrice"
+        ]
+      }
+    }
+  },
+  "paths": {
+    "/booking": {
+      "post": {
+        "operationId": "bookTicket",
+        "summary": "Book a ticket",
+        "description": "Book a ticket using account id",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BookingDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully booked ticket"
+          },
+          "400": {
+            "description": "Required to be logged in for this action"
+          },
+          "500": {
+            "description": "Something went terribly wrong"
+          }
+        },
+        "tags": [
+          "booking"
+        ]
+      }
+    },
+    "/ticket/{ticketId}": {
+      "get": {
+        "operationId": "getTicketById",
+        "summary": "Retrieve a ticket with given ticket id",
+        "description": "Retrieves a ticket with given ticket id, user role required to perform this operation",
+        "parameters": [
+          {
+            "name": "ticketId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved ticket by ticket id"
+          },
+          "500": {
+            "description": "Something went terribly wrong"
+          }
+        },
+        "tags": [
+          "ticket"
+        ]
+      }
+    },
+    "/admin/ticket": {
+      "get": {
+        "operationId": "getAllTickets",
+        "summary": "Retrieve all tickets",
+        "description": "Retrieve all tickets, admin role required to perform this operation",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Retrieved all tickets"
+          },
+          "500": {
+            "description": "Something went terribly wrong"
+          }
+        },
+        "tags": [
+          "admin"
+        ],
+        "security": [
+          {
+            "backendToken": []
+          }
+        ]
+      }
+    }
+  }
+}
