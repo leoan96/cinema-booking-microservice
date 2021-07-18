@@ -1,73 +1,128 @@
+# cinema-catalog-microservice
+
+<!-- PROJECT LOGO -->
+<br />
 <p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
+  <a href="https://github.com/othneildrew/Best-README-Template">
+    <img src="images/booking.jpg" alt="Logo" width="80" height="80">
+  </a>
+
+  <h3 align="center">Cinema-Booking-README</h3>
+
+  <p align="center">
+    Responsible for movie listing, cinema availability, movie primieres, and etc...
+  </p>
 </p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+<!-- TABLE OF CONTENTS -->
+<details open="open">
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+    </li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#installation">Installation</a></li>
+      </ul>
+    </li>
+    <li><a href="#usage">Usage</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#license">License</a></li>
+    <li><a href="#acknowledgements">Acknowledgements</a></li>
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+  </ol>
+</details>
 
-## Description
+<!-- ABOUT THE PROJECT -->
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## About The Project
 
-## Installation
+Refer to: https://github.com/leoan96/cinema-microservice
 
-```bash
-$ npm install
-```
+<!-- GETTING STARTED -->
 
-## Running the app
+## Getting Started
 
-```bash
-# development
-$ npm run start
+This is an example of how you may give instructions on setting up your project locally.
+To get a local copy up and running follow these simple example steps.
 
-# watch mode
-$ npm run start:dev
+### Prerequisites
 
-# production mode
-$ npm run start:prod
-```
+This is an example of how to list things you need to use the software and how to install them.
 
-## Test
+- npm
 
-```bash
-# unit tests
-$ npm run test
+  ```sh
+  npm install npm@latest -g
+  ```
 
-# e2e tests
-$ npm run test:e2e
+- create a .env file
+- store secrets & environment variables (the values below are just sample values, please replace them with your own credentials)
+- Change the port of API_PAYMENT_URL appropriately according to cinema-payment-microservice's port
+- ```sh
+  SERVER_PORT=3002
+  NODE_ENV=development
+  BACKEND_TOKEN=865b0e87c145c61d9c5b4682825f8a026017e03380c310273097989769fb
+  MONGO_DATABASE_URI=mongodb+srv://<username>:<password>@cluster0.tihvu.mongodb.net/<database>?authSource=admin&replicaSet=atlas-ltmo8u-shard-0&w=majority&readPreference=primary&appname=MongoDB%20Compass&retryWrites=true&ssl=true
+  EXPRESS_SESSION_SECRET=dfc89d6a182025d62ab2ae3485b0497b4cc9397f1ab820fb3b5f3fa99c45
+  REDIS_PORT=15136
+  REDIS_HOST=redis-15136.c1.ap-southeast-3-5.ec2.cloud.redislabs.com
+  REDIS_PASSWORD=26186baa6eb3d6088925571d166564db0a1f3d5931c7386aa0b08a6d6fa8
+  APP_BASE_URL=http://localhost:3002
+  API_PAYMENT_URL=http://localhost:3003
+  JWT_PRIVATE_KEY=yOApKaHZMVnJRbENKVlRPeGpmdGIraHdBY1RUQStGSDhweTRodXZNaW9IMzRGK0xEdUp1cjAyZUxmejJjcmVGbXl2CngyVTk5M0ZwWDFOdXY2SW1GdUVHV1VxL1pvZkgyREd6SndLQ0FRQlhlQlk0Rzd1TTZRR1JDSTV1bjZ1RlJ3NjMKWXFVdFd5Rk9uMDE5czVxVWh2TlRjbEVUNXZoOGY3dlNPb0o5bitnUnZ0YTYyM2t6dlZJby9WNDZvZEs5LzNFWQpJd1NieDk4dmQ0QzR0cnRKdEtaUk5FREVHc0xmS3M4UlhzVmhjMHNGUGR2VTlUZzRDem9NV0svTGxHYUpGeGZQCm53anNGQVhvRWVxZzhUeWQ2S00zVzlOWmpra0dPdHNRUkdZRVFROXZGQUxuRFkyU
+  JWT_PUBLIC_KEY=FhRnFLL2dZQVZqeFRkeG9TQlFKaUR5ZVVlWExNCnlpdFJkd00yN1I5UG44TzFXNUxpVGoxMFJSbGJJd0JjN3ZNbWZZYlBlK1dabHpIK3dpNFpQb0tJanVubU5ZSGgKbDZLcUFvays5aHQ1ZVdWVT=
+  JWT_EXPIRES_IN=30s
+  JWT_ALGORITHM=RS512
+  ```
 
-# test coverage
-$ npm run test:cov
-```
+### Installation
 
-## Support
+1. Clone the repo
+   ```sh
+   git clone https://github.com/leoan96/cinema-booking-microservice.git
+   ```
+2. Install NPM packages
+   ```sh
+   npm install
+   ```
+3. Generate JWT_PRIVATE_KEY & JWT_PUBLIC_KEY
+   ```sh
+   openssl genrsa -out private.pem 2048 (generate private key)
+   openssl rsa -in private.pem -outform PEM -pubout -out public.pem  (generate public key)
+   cat private.pem | base64 -o private privateKey
+   ```
+4. Copy the privateKey and paste to .env file
+5. Start server
+   ```sh
+   npm run start:dev
+   ```
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+<!-- USAGE EXAMPLES -->
 
-## Stay in touch
+## Usage
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+You can utilize the api endpoints using either Postman or visiting http://localhost:3002/api
+
+To use any endpoints from this or other microservices that require authorization, please use this cinema-account-microservice's login endpoint
+
+_For more examples, please refer to the [Documentation](https://example.com)_
+
+<!-- ROADMAP -->
+
+## Roadmap
+
+TBA
+
+<!-- LICENSE -->
 
 ## License
 
-Nest is [MIT licensed](LICENSE).
+Distributed under the MIT License. See `LICENSE` for more information.
+
+## Acknowledgements
+
+- [TBA](https://github.com/leoan96/cinema-microservice)
